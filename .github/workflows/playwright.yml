@@ -23,7 +23,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --project=${{ matrix.browser }}
+        run: npx playwright test --project=${{ matrix.browser }} --workers=4 --reporter=html --reporter=github
 
       - name: Upload report
         if: failure()

@@ -38,10 +38,11 @@ test.describe('Article Operations', () => {
 
   test('Filter Articles by Tag', async ({ page }) => {
     await page.goto('/');
-    await page.click('text=test'); // Click tag
+    await page.click('text=test');
     await expect(page.locator('.article-preview')).toContainText('test');
   });
 
+  // Negative test cases
   test('Negative - Create article without title shows error', async ({ page }) => {
     await articlePage.goToEditor();
     await articlePage.createArticle('', 'Desc', 'Body', ['tag']);
