@@ -14,6 +14,7 @@ test('Update User Settings', async ({ page }) => {
   await expect(settingsPage.bioInput).toHaveValue(newBio);
 });
 
+// Negative test cases
 test('Negative - Update bio with empty value shows error', async ({ page }) => {
   const settingsPage = new SettingsPage(page);
   await settingsPage.loginViaSession();
