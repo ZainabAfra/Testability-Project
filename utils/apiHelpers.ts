@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const API_URL = 'https://your-api-url.com/api';
+const API_URL = 'https://api.realworld.io/api';
 
 export async function createArticleViaAPI() {
   const token = process.env.AUTH_TOKEN!;

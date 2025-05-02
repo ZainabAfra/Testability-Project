@@ -8,7 +8,7 @@ export class SettingsPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.bioInput = page.locator('textarea[placeholder="Short bio about you"]');
+    this.bioInput = page.locator('textarea[placeholder=""]');
     this.saveButton = page.locator('button:has-text("Update Settings")');
   }
 

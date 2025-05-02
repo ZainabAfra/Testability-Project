@@ -4,30 +4,40 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # ✅ Use a stable image to avoid toolchain issues
 
     strategy:
       matrix:
-        browser: [chromium, firefox, webkit]
+        browser: [chromium, firefox, webkit]  # ✅ Cross-browser testing
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3.6.0  # ✅ Pin to a known stable version
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.9.1
         with:
           node-version: 18
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Install browsers
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test --project=${{ matrix.browser }} --workers=4 --reporter=html --reporter=github
+        run: |
+          npx playwright test \
+            --project=${{ matrix.browser }} \
+            --workers=4 \
+            --reporter=html \
+            --reporter=github
+        env:
+          PLAYWRIGHT_TRACE: retain-on-failure  # ✅ Automatically capture traces for failed tests
 
-      - name: Upload report
-        if: failure()
-        uses: actions/upload-artifact@v3
+      - name: Upload Playwright HTML Report
+        if: always()  # ✅ Always upload to help debug even passed runs
+        uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report
