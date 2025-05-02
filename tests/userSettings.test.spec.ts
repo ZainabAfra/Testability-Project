@@ -13,6 +13,14 @@ test('Update User Settings', async ({ page }) => {
   await settingsPage.goto();
   await expect(settingsPage.bioInput).toHaveValue(newBio);
 });
+test.describe("User Settings", () => {
+  test.beforeEach(async ({ page }) => {
+    const settingsPage = new SettingsPage(page);
+    await settingsPage.loginViaSession();
+    await settingsPage.goto();
+  });
+});
+
 
 // Negative test cases
 test('Negative - Update bio with empty value shows error', async ({ page }) => {

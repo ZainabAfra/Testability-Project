@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "lib": [
+        "dom",
+        "es2015"
+      ],
+      "types": [
+        "node"
+        ],
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+      "target": "es5",
+      "esModuleInterop":true
+    },
+    "noEmit": false,
+    "include": ["**/*.ts", "cypress/support/*.ts", "cypress/e2e/step_defenitions/setup_steps.ts", "cypress/e2e/step_defenitions", "cypress.config.js", "cypress/e2e/f2/features/regression/schedule_posting-spec.cy.js"]
+    
+
+  }

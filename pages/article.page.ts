@@ -18,15 +18,16 @@ export class ArticlePage {
   }
 
   async goToEditor() {
-    await this.page.goto('/editor');
+    await this.page.goto('https://conduit.bondaracademy.com/.');
   }
 
   async createArticle(title: string, desc: string, body: string, tags: string[]) {
-    await this.page.fill('[placeholder="Article Title"]', title);
-    await this.page.fill('[placeholder="What\'s this article about?"]', desc);
-    await this.page.fill('[placeholder="Write your article (in markdown)"]', body);
-    await this.page.fill('[placeholder="Enter tags"]', tags.join(','));
-    await this.page.click('button:has-text("Publish Article")');
+    await this.page.locator("//a[@routerlink='/editor']").click();
+    await this.page.fill("//input[@placeholder='Article Title']", title);
+    await this.page.fill("//input[@placeholder='What's this article about?']", desc);
+    await this.page.fill("//textarea[@placeholder='Write your article (in markdown)']", body);
+    await this.page.fill("//input[@placeholder='Enter tags']", tags.join(', '));
+    await this.page.click("//button[normalize-space()='Publish Article']");
   }
 
   async goToArticle(slug: string) {
