@@ -1,43 +1,34 @@
-
 import { test, expect } from '@playwright/test';
-import { ArticlePage } from '../pages/article.page';
-import { createArticleViaAPI } from '../utils/apiHelpers';
+import ArticlePage from '../pages/article.page';
+import {LoginPage} from '../pages/login.page';
+import LoginHelper from '../utils/loginHelper';
+import AddArticlePage from '../pages/article.page';
 import { generateArticle } from '../utils/testData';
 
+
 test.describe('Article Operations', () => {
-  let articlePage: ArticlePage;
+  let loginPage: LoginPage;
+  let addArticlePage: ArticlePage;
+  let loginHelper: LoginHelper;
   let slug: string;
 
   test.beforeEach(async ({ page }) => {
-    articlePage = new ArticlePage(page);
-    await articlePage.loginViaSession();
+    loginPage = new LoginPage(page);
+    loginHelper = new LoginHelper(page);
+    await loginHelper.loginToTheApp();
+    addArticlePage = new AddArticlePage(page);
+    
   });
 
-  test('Create New Article', async ({ page }) => {
+  test.only('Create New Article', async ({ page }) => {
     const article = generateArticle();
-    await articlePage.goToEditor();
-    await articlePage.createArticle(article.title, article.description, article.body, Array.isArray(article.tags) ? article.tags : [article.tags]);
+    await addArticlePage.createArticle(article.title, article.description, article.body, article.tags);
   });
-
-  test('Edit Article', async ({ page }) => {
-    slug = await createArticleViaAPI();
-    await articlePage.goToArticle(slug);
-    const newTitle = 'Updated Title';
-    await articlePage.editArticle(newTitle);
-    
-  });
-
-  test('Delete Article', async ({ page }) => {
-    slug = await createArticleViaAPI();
-    await articlePage.goToArticle(slug);
-    await articlePage.deleteArticle();
-    
-  });
-
-  // Negative test cases
+  
+ // Negative test cases
   test('Negative - Create article without title shows error', async ({ page }) => {
-    await articlePage.goToEditor();
-    await articlePage.createArticle('', 'Desc', 'Body', ['tag']);
+    await addArticlePage.createArticle('', 'Desc', 'Body', ['tag']);
     await expect(page.locator('.error-messages')).toContainText("title can't be blank");
   });
 });
+

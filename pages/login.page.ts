@@ -1,41 +1,25 @@
-import { Page } from '@playwright/test';
-import { generateUserProfile } from '../utils/testData';
-
+import elementforLoginPage from '../locators/loginPage';
 export class LoginPage {
-    private page: Page;
-
-    constructor(page: Page) {
-        if (!page) {
-            throw new Error('Page instance is required');
-        }
-        this.page = page;
+    [x: string]: any;
+    readonly page;
+    readonly emailInput;
+    readonly passwordInput;
+    readonly loginButton;
+  
+    constructor(page) {
+      this.page = page;
+      this.emailInput = page.locator(elementforLoginPage.emailInput);
+      this.passwordInput = page.locator(elementforLoginPage.passwordInput);
+      this.loginButton = page.locator(elementforLoginPage.loginButton);
     }
-
-    async navigateToLoginPage() {
-        await this.page.goto('https://conduit.bondaracademy.com/login');
+  
+    async loginToApplication(email: string, password: string) {
+      await this.page.goto('https://conduit.bondaracademy.com/login');
+      await this.emailInput.fill(email);
+      await this.passwordInput.fill(password);
+      await this.loginButton.click();
+       
     }
-
-    async enterEmail(email: string) {
-        await this.page.fill('input[placeholder="Email"]', email);
-    }
-
-    async enterPassword(password: string) {
-        await this.page.fill('input[placeholder="Password"]', password);
-    }
-
-    async clickSignInButton() {
-        await this.page.click('button[type="submit"]');
-    }
-
-    async login(email: string, password: string) {
-        await this.navigateToLoginPage();
-        await this.enterEmail(email);
-        await this.enterPassword(password);
-        await this.clickSignInButton();
-    }
-
-    async isErrorMessageVisible(): Promise<boolean> {
-        return this.page.isVisible('.error-messages');
-    }
-}
-export default LoginPage;
+  }
+  
+  export default LoginPage;

@@ -1,51 +1,53 @@
+import { APIRequestContext } from '@playwright/test';
 
-import axios from 'axios';
-import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
-
-dotenv.config();
-
-const API_URL = process.env.API_URL!;
-
-async function loginAndStoreToken() {
-  const email = process.env.EMAIL!;
-  const password = process.env.PASSWORD!;
-
-  const response = await axios.post(`${API_URL}/users/login`, {
-    user: { email, password },
-  });
-
-  const token = response.data.user.token;
-
-  // Optional: write token to .env for reuse
-  const envPath = path.resolve(__dirname, '../.env');
-  const envContents = fs.readFileSync(envPath, 'utf-8');
-  const updatedEnv = envContents.replace(/AUTH_TOKEN=.*/g, `AUTH_TOKEN=${token}`);
-  fs.writeFileSync(envPath, updatedEnv);
-
-  return token;
-}
-
-export async function createArticleViaAPI() {
-  let token = process.env.AUTH_TOKEN;
-
-  if (!token || token.trim() === '') {
-    token = await loginAndStoreToken();
-  }
-
-  const res = await axios.post(
-    `${API_URL}/articles`,
-    {
-      article: {
-        title: 'Test API Article',
-        description: 'desc',
-        body: 'body content',
-        tagList: ['test'],
+export async function createArticleViaAPI(user: { email: string; password: string }, article: any, apiRequest: APIRequestContext): Promise<string> {
+  try {
+    const loginResponse = await apiRequest.post('https://conduit.bondaracademy.com/api/users/login', {
+      data: {
+        user: {
+          email: user.email,
+          password: user.password,
+        },
       },
-    },
-    { headers: { Authorization: `Token ${token}` } }
-  );
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return res.data.article.slug;
+    if (loginResponse.status() !== 200) {
+      throw new Error(`Login failed with status code: ${loginResponse.status()}`);
+    }
+
+    const loginData = await loginResponse.json();
+    const token = loginData.user.token;
+    const articleResponse = await apiRequest.post(
+      'https://conduit.bondaracademy.com/api/articles',
+      {
+        data: {
+          article: {
+            title: article.title,
+            description: article.description,
+            body: article.body,
+            tags: article.tags,
+          },
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`,
+        },
+      }
+    );
+
+    if (articleResponse.status() !== 200) {
+      throw new Error(`Failed to create article with status code: ${articleResponse.status()}`);
+    }
+
+    const articleData = await articleResponse.json();
+    const slug = articleData.article.slug;
+
+    return slug;
+  } catch (error) {
+    console.error('Error during API request:', error);
+    throw error;
+  }
 }
