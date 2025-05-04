@@ -10,7 +10,7 @@ test.describe('Article Operations', () => {
   let loginPage: LoginPage;
   let addArticlePage: ArticlePage;
   let loginHelper: LoginHelper;
-  let slug: string;
+  
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -20,7 +20,7 @@ test.describe('Article Operations', () => {
     
   });
 
-  test.only('Create New Article', async ({ page }) => {
+  test('Create New Article', async ({ page }) => {
     const article = generateArticle();
     await addArticlePage.createArticle(article.title, article.description, article.body, article.tags);
   });
