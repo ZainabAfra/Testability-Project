@@ -29,6 +29,10 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # ✅ Install the Allure Playwright adapter (missing before)
+      - name: Install Allure Playwright Adapter
+        run: npm install -D allure-playwright
+
       - name: Install Allure CLI
         run: npm install -g allure-commandline
 
@@ -38,6 +42,10 @@ jobs:
         env:
           BASE_URL: https://conduit.bondaracademy.com
           PLAYWRIGHT_TRACE: retain-on-failure
+
+      - name: Debug allure-results folder
+        if: always()
+        run: ls -R ./allure-results || echo "No allure-results found"
 
       - name: Generate Allure Report
         if: always()

@@ -7,9 +7,9 @@ class DeleteArticlePage {
   }
   async deleteArticle() {
     await this.page.locator(elementsforCreateArticle.articleTitle).first().click({force: true});
-    await this.page.waitForTimeout(5000);
+    await this.page.waitForTimeout(7000);
     await this.page.locator(elementsforCreateArticle.deleteButton).click({force: true});
-    await this.page.waitForTimeout(2000);
+    ;
   }
 
   
