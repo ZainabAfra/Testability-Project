@@ -10,7 +10,7 @@ export function generateUser() {
   };
 }
 
-
+// Keeping the function for backup purposes.
 // export function generateArticle() {
 //   return {
 //     title:"Quality Assurance Testing: Ensuring Excellence in Software Development",

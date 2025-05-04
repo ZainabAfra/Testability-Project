@@ -24,7 +24,7 @@ test.describe("User Settings", () => {
     await settingsPage.navigateToSettings(setting.image, setting.username, setting.bio, setting.email, setting.newPassword);
 });
 
-// There are no negative test for this scenario, if was the code should be like this.
+// Currently, there are no negative test cases for the Settings page. If I were to write one, it would look something like this.
 // Negative test cases
 /*test('Negative - Update bio with empty value shows error', async ({ page }) => {
   const invalidEmail = "invalidEmail";
