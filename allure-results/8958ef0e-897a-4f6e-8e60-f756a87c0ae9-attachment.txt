@@ -1,0 +1,11 @@
+Error during API request: Error: Login failed with status code: 405
+    at createArticleViaAPI (C:\Users\afsar\TestabilityProject\utils\apiHelpers.ts:15:13)
+    at C:\Users\afsar\TestabilityProject\tests\article.test.spec.ts:87:12
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:304:9
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:277:11
+    at TimeoutManager.withRunnable (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\timeoutManager.js:67:14)
+    at TestInfoImpl._runWithTimeout (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:275:7)
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:302:7
+    at WorkerMain._runTest (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:277:5)
+    at WorkerMain.runTestGroup (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:193:11)
+    at process.<anonymous> (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\common\process.js:70:22)

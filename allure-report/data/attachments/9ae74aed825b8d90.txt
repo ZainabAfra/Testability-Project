@@ -1,0 +1,11 @@
+Error during API request: TypeError: _test.request.post is not a function
+    at createArticleViaAPI (C:\Users\afsar\TestabilityProject\utils\apiHelpers.ts:6:41)
+    at C:\Users\afsar\TestabilityProject\tests\article.test.spec.ts:87:37
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:304:15
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:277:17
+    at TimeoutManager.withRunnable (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\timeoutManager.js:68:9)
+    at TestInfoImpl._runWithTimeout (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:275:34)
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:302:22
+    at WorkerMain._runTest (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:277:5)
+    at WorkerMain.runTestGroup (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:193:11)
+    at process.<anonymous> (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\common\process.js:70:22)

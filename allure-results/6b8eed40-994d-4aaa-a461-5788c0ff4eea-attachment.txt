@@ -1,0 +1,14 @@
+API Error: SyntaxError: Unexpected token '<', "<html>
+<h"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at APIResponse.json (C:\Users\afsar\TestabilityProject\node_modules\playwright-core\lib\client\fetch.js:299:17)
+    at createArticleViaAPI (C:\Users\afsar\TestabilityProject\utils\apiHelpers.ts:23:23)
+    at C:\Users\afsar\TestabilityProject\tests\article.test.spec.ts:87:12
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:304:9
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:277:11
+    at TimeoutManager.withRunnable (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\timeoutManager.js:67:14)
+    at TestInfoImpl._runWithTimeout (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\testInfo.js:275:7)
+    at C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:302:7
+    at WorkerMain._runTest (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:277:5)
+    at WorkerMain.runTestGroup (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\worker\workerMain.js:193:11)
+    at process.<anonymous> (C:\Users\afsar\TestabilityProject\node_modules\playwright\lib\common\process.js:70:22)
