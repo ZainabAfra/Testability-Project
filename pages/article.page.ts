@@ -1,5 +1,4 @@
 import {test, expect} from '@playwright/test';
-import { generateArticle } from '../utils/testData';
 import elementsforCreateArticle from '../locators/createArticle';
 class AddArticlePage {
   private page: any;

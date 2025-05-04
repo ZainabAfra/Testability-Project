@@ -1,18 +1,22 @@
 name: Playwright Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
-    runs-on: ubuntu-22.04  # ✅ Use a stable image to avoid toolchain issues
+    runs-on: ubuntu-22.04
 
     strategy:
       matrix:
-        browser: [chromium, firefox, webkit]  # ✅ Cross-browser testing
+        browser: [chromium, firefox, webkit]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.6.0  # ✅ Pin to a known stable version
+        uses: actions/checkout@v3.6.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3.9.1
@@ -33,10 +37,11 @@ jobs:
             --reporter=html \
             --reporter=github
         env:
-          PLAYWRIGHT_TRACE: retain-on-failure  # ✅ Automatically capture traces for failed tests
+          BASE_URL: https://conduit.bondaracademy.com
+          PLAYWRIGHT_TRACE: retain-on-failure
 
       - name: Upload Playwright HTML Report
-        if: always()  # ✅ Always upload to help debug even passed runs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report-${{ matrix.browser }}

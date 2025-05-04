@@ -1,3 +1,4 @@
+import { Page } from 'playwright';
 import elementforLoginPage from '../locators/loginPage';
 export class LoginPage {
     [x: string]: any;
@@ -6,7 +7,7 @@ export class LoginPage {
     readonly passwordInput;
     readonly loginButton;
   
-    constructor(page) {
+    constructor(page: Page) {
       this.page = page;
       this.emailInput = page.locator(elementforLoginPage.emailInput);
       this.passwordInput = page.locator(elementforLoginPage.passwordInput);
