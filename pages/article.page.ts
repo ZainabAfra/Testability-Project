@@ -1,9 +1,9 @@
-import {expect} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import elementsforCreateArticle from '../locators/createArticle';
 class AddArticlePage {
-  private page: any;
+  private page: Page;
 
-  constructor(page: any) {
+  constructor(page: Page) {
     this.page = page;
   }
 

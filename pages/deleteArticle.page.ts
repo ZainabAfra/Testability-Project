@@ -1,8 +1,9 @@
+import { Page } from 'playwright';
 import elementsforCreateArticle from '../locators/createArticle';
 class DeleteArticlePage {
-  private page: any;
+  private page: Page;
 
-  constructor(page: any) {
+  constructor(page: Page) {
     this.page = page;
   }
   async deleteArticle() {
