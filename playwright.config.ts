@@ -20,11 +20,30 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    storageState: 'playwright/.auth/state.json',
   },
 
   projects: [
-    { name: 'chromium', use: { browserName: 'chromium' } },
-    { name: 'firefox', use: { browserName: 'firefox' } },
-    { name: 'webkit', use: { browserName: 'webkit' } },
+    {
+      name: 'chromium',
+      use: {
+        browserName: 'chromium',
+        storageState: 'playwright/.auth/state.json',
+      },
+    },
+    {
+      name: 'firefox',
+      use: {
+        browserName: 'firefox',
+        storageState: 'playwright/.auth/state.json',
+      },
+    },
+    {
+      name: 'webkit',
+      use: {
+        browserName: 'webkit',
+        storageState: 'playwright/.auth/state.json',
+      },
+    },
   ],
 });
